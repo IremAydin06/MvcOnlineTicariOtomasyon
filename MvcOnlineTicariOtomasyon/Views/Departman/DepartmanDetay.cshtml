@@ -1,0 +1,51 @@
+﻿@using MvcOnlineTicariOtomasyon.Models.Siniflar
+@model List<Personel>
+@{
+    ViewBag.Title = "DepartmanDetay";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<br />
+<h2>Departman Detay Sayfası</h2>
+<br />
+<ol class="breadcrumb mb-4">
+    <li class="breadcrumb-item active"><b>Departman Adı:</b> @ViewBag.d</li>
+</ol>
+<br />
+<table id="tbl1" class="table table-hover">
+    <thead>
+        <tr>
+            @*<th>PERSONEL ID</th>*@
+            <th>AD SOYAD</th>
+            @*<th>SOYAD</th>*@
+            <th>GÖRSEL</th>
+            <th>SATIŞLAR</th>
+        </tr>
+    </thead>
+    @foreach (var x in Model)
+    {
+        <tr>
+            @*<td>@x.Personelid</td>*@
+            <td>@x.PersonelAd @x.PersonelSoyad</td>
+            @*<td>@x.PersonelSoyad</td>*@
+            <td><image src="@x.PersonelGorsel" style="width:130px; height:80px;"/></td>
+            <td><a href="/Departman/DepartmanPersonelSatis/@x.Personelid" class="btn btn-default" style="background-color:darksalmon">Satışlar</a></td>
+        </tr>
+    }
+</table>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+
+<script>
+    $('#tbl1').dataTable({
+        "language" : {
+
+            "url": "//cdn.datatables.net/plug-ins/1.10.12/i18n/Turkish.json"
+
+        }
+    });
+</script>

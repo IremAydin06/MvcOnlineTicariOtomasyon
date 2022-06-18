@@ -1,0 +1,140 @@
+﻿
+
+@********************************************** FATURA INDEX ********************************************@
+
+
+@using MvcOnlineTicariOtomasyon.Models.Siniflar
+@model List<Faturalar>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<br />
+<a  class="btn btn-default btn-block" style="background-color:teal; color: white" data-toggle="modal" data-target="#Modal1">Hızlı Bakış Penceresi</a>
+<br />
+<a href="/Fatura/FaturaEkle" class="btn btn-info btn-block">Fatura Ekle</a>
+
+
+<br />
+<table id="tbl1" class="table table-bordered" style="margin-top:20px">
+    <thead>
+        <tr>
+            @*<th>ID</th>*@
+            <th>SERİ-SIRA NO</th>
+            <th>VERGİ DAİRESİ</th>
+            <th>TARİH</th>
+            @*<th>SAAT</th>*@
+            <th>TESLİM EDEN</th>
+            <th>TESLİM ALAN</th>
+            <th>TOPLAM</th>
+            <th>GÜNCELLE</th>
+            <th>DETAYLAR</th>
+            @*<th>POPUP LİSTE</th>*@
+            <th>YENİ KALEM</th>
+        </tr>
+    </thead>
+    <!--4 parametre yazacağız içine. 1.si değişkenin türü,2.değişken ismi, 3. in(içinden), 4. değişkeni nereden alacağımız-->
+    @foreach (var f in Model)
+    {
+        <tr>
+            @*<td>@f.Faturaid</td>*@
+            <td>@f.FaturaSeriNo @f.FaturaSıraNo</td>
+            <td>@f.VergiDairesi</td>
+            <td>@Convert.ToDateTime(f.Tarih).ToString("dd/MM/yyyy") @f.Saat</td>
+            @*<td>@f.Saat</td>*@
+            <td>@f.TeslimEden</td>
+            <td>@f.TeslimAlan</td>
+            <td>@f.Toplam ₺</td>
+            <td>
+                <a href="/Fatura/FaturaGetir/@f.Faturaid" class="btn btn-warning">Güncelle</a>
+            </td>
+            <td>
+                <a href="/Fatura/FaturaDetay/@f.Faturaid" class="btn btn-default" style="background-color:limegreen; color: white">Detaylar</a>
+            </td>
+            @*<td>
+                <a href="/Fatura/FaturaDetay/@f.Faturaid" class="btn btn-warning" style="background-color: lightseagreen; color: white">PopUp</a>
+            </td>*@
+            <td>
+                <a href="/Fatura/FaturaDetay/@f.Faturaid" class="btn btn-default" style="background-color:darkcyan; color: white">Kalem</a>
+            </td>
+        </tr>
+    }
+</table>
+@*<a href="/Urun/YeniUrun" class="btn btn-primary">Yeni Ürün</a>*@
+
+@********************************************** POPUP *****************************@
+
+
+
+<div class="modal" id="Modal1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Popup Diyalog Ekranı</h2>
+            </div>
+            <div class="modal-body">
+                <table id="tbl2" class="table table-bordered" style="margin-top:20px">
+                    @*<thead>*@
+                        <tr>
+                            <th>Seri-Sıra No</th>
+                            <th>Cari</th>
+                            <th>Tutar</th>
+                        </tr>
+                    @*</thead>*@
+                    @foreach(var x in Model)
+                    { 
+                        <tr>
+                            <td>@x.FaturaSeriNo@x.FaturaSıraNo</td>
+                            <td>@x.TeslimAlan</td>
+                            <td>@x.Toplam ₺</td>
+                        </tr>
+                    }
+                </table>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Kapat</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+
+<script>
+    $('#tbl1').dataTable({
+        "language": {
+
+            "url": "//cdn.datatables.net/plug-ins/1.10.12/i18n/Turkish.json"
+
+        }
+    });
+</script>
+
+<script>
+    $('#tbl2').dataTable({
+        "language": {
+
+            "url": "//cdn.datatables.net/plug-ins/1.10.12/i18n/Turkish.json"
+
+        }
+    });
+</script>

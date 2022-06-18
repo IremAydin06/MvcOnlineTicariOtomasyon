@@ -1,0 +1,40 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<h2>Index</h2>
+
+
+@*********** View üzerinde Chart Kullanımı ************@
+
+@{ 
+    var grafik = new Chart ( width:500, height: 500);
+    grafik.AddTitle(text: "Kategoriler ve Ürün Sayıları");
+    grafik.AddLegend(title: "Değerler");
+
+    grafik.AddSeries(
+        name: "Veriler",
+        //chartType "Bubble",
+        //chartType: "Pie",
+        //chartType: "Doughnut",
+        //chartType: "Area",
+        //chartType: "Bar",
+        //chartType: "Spline",
+        //chartType: "StepLine",
+        //chartType: "Funnel",
+        //chartType: "Pyramid",
+        //chartType: "Kagi",
+        //chartType: "PointAndFigure",
+        //chartType: "Renko",
+        //chartType: "ThreeLineBreak",
+        //chartType: "Polar",
+        //chartType: "Radar",
+        chartType: "Pie",
+        xValue: new [] {"Beyaz Eşya", "Küçük Ev Aletleri", "Telefon", "Mobilya", "Bilgisayar"},
+        yValues: new [] {500, 250, 340, 620, 158 }
+        );
+    grafik.Write();
+
+}

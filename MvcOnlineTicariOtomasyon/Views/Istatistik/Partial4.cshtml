@@ -1,0 +1,86 @@
+﻿
+
+@********************* KATEGORİDEKİ ÜRÜN ADETİ TABLOSU *************************************@
+
+
+@model IEnumerable<MvcOnlineTicariOtomasyon.Models.Siniflar.SinifGrup4>
+
+@*@using MvcOnlineTicariOtomasyon.Models.Siniflar
+@model List<Kategori>*@
+
+
+<div class="card">
+    <div class="card-header">
+        <h3 class="card-title">Kategori-Ürün Tablosu</h3>
+    </div>
+    <!-- /.card-header -->
+    <div class="card-body">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th style="width: 10px">#</th>
+                    <th>Kategori Adı</th>
+                    <th>Progress Bar</th>
+                    <th style="width: 40px">Ürün Adet</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{ int sirano = 0;}
+                @foreach (var x in Model)
+                {
+                    <tr>
+                        <td>@{ sirano++;}@sirano</td>
+                        <td>@x.Kategori</td>
+                        <td>
+                            @if (x.Sayi == 0)
+                            {
+                                <div class="progress progress-xs">
+                                    <div class="progress-bar bg-danger" style="width: 5%"></div>
+                                </div>
+                            }
+                            @if (x.Sayi == 1)
+                            {
+                                <div class="progress progress-xs">
+                                    <div class="progress-bar bg-danger" style="width: 20%"></div>
+                                </div>
+                            }
+                            @if (x.Sayi == 2)
+                            {
+                                <div class="progress progress-xs">
+                                    <div class="progress-bar bg-warning" style="width: 40%"></div>
+                                </div>
+                            }
+                            @if (x.Sayi >= 3)
+                            {
+                                <div class="progress progress-xs">
+                                    <div class="progress-bar bg-success" style="width: 60%"></div>
+                                </div>
+                            }
+                        </td>
+                        <td>
+                            @if (x.Sayi == 0)
+                            {
+                                <span class="badge bg-danger">0</span>
+                            }
+                            @if (x.Sayi == 1)
+                            {
+                                <span class="badge bg-danger">@x.Sayi</span>
+                            }
+                            @if (x.Sayi == 2)
+                            {
+                                <span class="badge bg-warning">@x.Sayi</span>
+                            }
+                            @if (x.Sayi >= 3)
+                            {
+                                <span class="badge bg-success">@x.Sayi</span>
+                            }
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <!-- /.card-body -->
+</div>
+
+

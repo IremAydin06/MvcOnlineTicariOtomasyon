@@ -1,0 +1,111 @@
+﻿@model MvcOnlineTicariOtomasyon.Models.Siniflar.SatisHareket
+@{
+    ViewBag.Title = "SatisYap";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+<br />
+<h2>Satış Yap</h2>
+<br />
+<form class="form-group" method="post">
+
+    @Html.LabelFor(x => x.Urunid)
+    <input type="text" name="Urunid" value="@ViewBag.dgr2" class="form-control" readonly />
+    @*@Html.TextBoxFor(x => x.Urunid, new { @class = "form-control" })*@
+
+    <br />
+
+    @Html.Label("Personel Ad")
+    @Html.DropDownListFor(x => x.Personelid, (List<SelectListItem>)ViewBag.dgr1, new
+    { @class = "form-control" })
+    @*@Html.TextBoxFor(x => x.Personelid, new { @class = "form-control" })*@
+
+    <br />
+
+    @Html.LabelFor(x => x.Cariid)
+    @Html.TextBoxFor(x => x.Cariid, new { @class = "form-control" })
+
+    <br />
+
+    @Html.LabelFor(x => x.Adet)
+    <input type="number" name="Adet" class="form-control" value="1" max="10" min="1" placeholder="Adet Girin" id="adet" onchange="multi();"  />
+    @*@Html.TextBoxFor(x => x.Adet, new { @class = "form-control" })*@
+
+    <br />
+
+    @Html.Label("Birim Fiyat")
+    <input type="text" name="Fiyat" value="@ViewBag.dgr3 ₺" class="form-control" id="fiyat" onkeyup="multi();" />
+    @*@Html.TextBoxFor(x => x.Fiyat, new { @class = "form-control" })*@
+
+    <br />
+
+    @Html.Label("İskonto Oranı (%)")
+    <input type="text" class="form-control" placeholder="İskonto Oranını Giriniz" id="iskonto" onchange="multi();" />
+
+    <br />
+
+    @Html.Label("İndirimsiz Tutar")
+    <input type="text" class="form-control" value="@ViewBag.dgr3 ₺" id="aratoplam" readonly />
+
+    <br />
+
+    @Html.LabelFor(x => x.ToplamTutar)
+    <input type="text" name="ToplamTutar" class="form-control" value="@ViewBag.dgr3 ₺"  id="toplam" readonly />
+    @*@Html.TextBoxFor(x => x.ToplamTutar, new { @class = "form-control" })*@
+
+    <br />
+
+    @Html.Label("Tarih")
+    <input type="text" class="form-control" value="@DateTime.Now" readonly />
+    @*@Html.TextBoxFor(x => x.Tarih, new { @class = "form-control" })*@
+
+    <br />
+
+    @*<input type="text" value="@DateTime.Now" id="weekDay" readonly />
+    <br />*@
+
+    <button class="btn btn-info">Satış Yap</button>
+</form>
+<br />
+
+<script>
+    function multi() {
+        var adet = document.getElementById('adet').value;
+        var fiyat = document.getElementById('fiyat').value;
+        var iskonto = document.getElementById('iskonto').value;
+
+        var aratoplam = parseInt(adet) * parseInt(fiyat)
+        if (!isNaN(aratoplam)) {
+            document.getElementById('aratoplam').value = aratoplam + " ₺"
+        }
+
+        var toplam = ((100 - parseInt(iskonto)) / 100) * parseInt(aratoplam)
+        if (!isNaN(toplam)) {
+            document.getElementById('toplam').value = toplam + " ₺"
+        }
+      }
+</script>
+
+
+
+
+@*jsfiddle.net*@
+
+@*<input type="text" id="txt1" onkeyup="sum();" />
+    <input type="text" id="txt2" onkeyup="sum();" />
+    <input type="text" id="txt3"/>*@
+
+@*<script>
+        function multi() {
+            var adet = document.getElementById('adet').value;
+            var fiyat = document.getElementById('fiyat').value;
+            var toplam = parseInt(adet) * parseInt(fiyat);
+
+            /*isNaN: Boşluktan farklıysa null degilse demek*/
+            if (!isNaN(toplam)) {
+                document.getElementById('toplam').value = toplam + " ₺";
+            }
+        }
+    </script>*@
+
+

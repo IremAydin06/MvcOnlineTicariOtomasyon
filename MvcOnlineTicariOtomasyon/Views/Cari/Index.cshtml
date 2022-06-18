@@ -1,0 +1,65 @@
+﻿
+
+@********************************************** CARİ INDEX ********************************************@
+
+
+@using MvcOnlineTicariOtomasyon.Models.Siniflar
+@model List<Cariler>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+<br />
+<a href="/Cari/CariEkle" class="btn btn-info btn-block">Cari Ekle</a>
+<br />
+<table id="tbl1" class="table table-striped">
+    <thead>
+        <tr>
+            <th>Cari ID</th>
+            <th>AD</th>
+            <th>SOYAD</th>
+            <th>ŞEHİR</th>
+            <th>MAİL</th>
+            <th>SİL</th>
+            <th>GÜNCELLE</th>
+            <th>DETAYLAR</th>
+        </tr>
+    </thead>
+    @foreach (var x in Model)
+    {
+        <tr>
+            <td>@x.Cariid</td>
+            <td>@x.CariAd</td>
+            <td>@x.CariSoyad</td>
+            <td>@x.CariSehir</td>
+            <td>@x.CariMail</td>
+            <td>
+                <a href="/Cari/CariSil/@x.Cariid" class="btn btn-danger">Sil</a>
+            </td>
+            <td>
+                <a href="/Cari/CariGetir/@x.Cariid" class="btn btn-warning">Güncelle</a>
+            </td>
+            <td>
+                <a href="/Cari/MusteriSatis/@x.Cariid" class="btn btn-group" style="background-color:limegreen; color: white"> Satış Geçmişi</a>
+            </td>
+        </tr>
+
+    }
+</table>
+@*<a href="/Cari/CariEkle" class="btn btn-primary">Cari Ekle</a>*@
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+
+<script>
+    $('#tbl1').dataTable({
+        "language": {
+
+            "url": "//cdn.datatables.net/plug-ins/1.10.12/i18n/Turkish.json"
+
+        }
+    });
+</script>

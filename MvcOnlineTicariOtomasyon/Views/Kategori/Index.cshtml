@@ -1,0 +1,61 @@
+﻿@********************************************** KATEGORİ INDEX ********************************************@
+
+
+<!--Sınıflara ulaşabilmek için bunu ekledik.-->
+@using MvcOnlineTicariOtomasyon.Models.Siniflar
+<!--Hangi sınıfı çağıracağımızı söyledik.-->
+@model List<Kategori>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+<br />
+<a href="/Kategori/KategoriEkle" class="btn btn-info btn-block">Kategori Ekle</a>
+<br />
+<table id="tbl1" class="table table-bordered" style="margin-top:20px">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>KATEGORİ ADI</th>
+            <th>SİL</th>
+            <th>GÜNCELLE</th>
+            <th>ÜRÜNLER</th>
+        </tr>
+    </thead>
+    <!--4 parametre yazacağız içine. 1.si değişkenin türü,2.değişken ismi, 3. in(içinden), 4. değişkeni nereden alacağımız-->
+    @foreach (var k in Model)
+    {
+        <tr>
+            <td>@k.KategoriID</td>
+            <td>@k.KategoriAd</td>
+            <td>
+                <a href="/Kategori/KategoriSil/@k.KategoriID" class="btn btn-danger" >Sil</a>
+            </td>
+            <td>
+                <a href="/Kategori/KategoriGetir/@k.KategoriID" class="btn btn-warning">Güncelle</a>
+            </td>
+            <td>
+                <a href="/Kategori/KategoriDetay/@k.KategoriID" class="btn btn-group" style="background-color:limegreen; color: white">Detaylar</a>
+            </td>
+        </tr>
+    }
+</table>
+@*<a href="/Kategori/KategoriEkle" class="btn btn-primary">Kategori Ekle</a>*@
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/1.10.22/css/dataTables.bootstrap4.min.css" rel="stylesheet" />
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.22/js/dataTables.bootstrap4.min.js"></script>
+
+
+<script>
+    $('#tbl1').dataTable({
+        "language": {
+
+            "url": "//cdn.datatables.net/plug-ins/1.10.12/i18n/Turkish.json"
+
+        }
+    });
+</script>
+
